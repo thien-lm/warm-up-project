@@ -13,7 +13,7 @@ public class Main {
 		GamePanel gamepanel = new GamePanel();
 		window.add(gamepanel);
 		window.pack();
-		
+		gamepanel.SetupGame();
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 		gamepanel.StartGame();

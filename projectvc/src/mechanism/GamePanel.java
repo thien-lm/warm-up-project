@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import Entity1.Player;
+import Object.SuperObject;
 import Tile.TilesManager;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -33,6 +34,9 @@ public class GamePanel extends JPanel implements Runnable{
 	TilesManager tilemanager = new TilesManager(this);
 	public CollisionChecker cChecker = new CollisionChecker(this);
 	
+	public Asset aset = new Asset(this);
+	public SuperObject obj[] = new SuperObject[10];
+	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth*scale, screenHeight*scale));
 		this.setBackground(Color.black);
@@ -42,6 +46,10 @@ public class GamePanel extends JPanel implements Runnable{
 
 		this.setFocusable(true);
 	
+	}
+	public void SetupGame()
+	{
+		aset.setObj();
 	}
 	public void StartGame()
 	{
@@ -105,6 +113,12 @@ public class GamePanel extends JPanel implements Runnable{
 		Graphics2D g2 = (Graphics2D)g;
 		
 		tilemanager.draw(g2);
+		
+		for(int i=0; i<obj.length; i++)
+		{
+			if(obj[i]!=null)
+			obj[i].draw(g2, this);
+		}
 		//map need to be draw before player
 		player.draw(g2);
 		g2.dispose();

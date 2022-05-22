@@ -1,5 +1,7 @@
 package mechanism;
 
+
+
 import Entity1.Entity;
 
 public class CollisionChecker {
@@ -70,6 +72,83 @@ public class CollisionChecker {
 			entity.collisonOn = true;
 		} break;
 		}
+	}
+	
+	public int CheckObject(Entity entity, boolean player)
+	{
+		int index = 999;
+		for(int i = 0;i < gp.obj.length; i++)
+		{
+			if(gp.obj[i] != null)
+			{
+				//entity collision
+				entity.solidArea.x += entity.x;
+				entity.solidArea.y += entity.y;
+				//object collision
+				gp.obj[i].rec.x += gp.obj[i].rec.x + gp.obj[i].x;
+				gp.obj[i].rec.y += gp.obj[i].rec.y + gp.obj[i].y;
+				
+				switch(entity.direction)
+				{
+				case("up"):
+				    entity.solidArea.y -= entity.speed;
+				if(entity.solidArea.intersects(gp.obj[i].rec)) {
+					
+				if(gp.obj[i].collision == true) entity.collisonOn = true;
+				if(player == true)
+				{
+					index = i;
+				}
+				}
+				break;
+				case("down"):
+					entity.solidArea.y += entity.speed;
+				if(entity.solidArea.intersects(gp.obj[i].rec)) {
+					System.out.println("collison down");
+				if(gp.obj[i].collision == true) entity.collisonOn = true;
+				if(player == true)
+				{
+					index = i;
+				}
+				}
+				break;
+				case("left"):
+					entity.solidArea.x -= entity.speed;
+				if(entity.solidArea.intersects(gp.obj[i].rec)) 
+					{
+					System.out.println("collison left");
+					
+				if(gp.obj[i].collision == true) entity.collisonOn = true;
+				if(player == true)
+				{
+					index = i;
+				}
+					}
+				break;
+				case("right"):
+					entity.solidArea.x += entity.speed;
+				if(entity.solidArea.intersects(gp.obj[i].rec)) 
+					{
+					System.out.println("collison right");
+					
+				if(gp.obj[i].collision == true) entity.collisonOn = true;
+				if(player == true)
+				{
+					index = i;
+				}
+					}
+				break;
+				}
+			entity.solidArea.x = entity.solidDefaultX;
+			entity.solidArea.y = entity.solidDefaultY;
+			gp.obj[i].rec.x = gp.obj[i].solidDefaultX;
+			gp.obj[i].rec.y = gp.obj[i].solidDefaultY;	
+				
+			}
+		}
+		
+		
+		return index;
 	}
 
 }

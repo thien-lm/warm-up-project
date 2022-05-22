@@ -34,8 +34,8 @@ public class GamePanel extends JPanel implements Runnable{
 	TilesManager tilemanager = new TilesManager(this);
 	public CollisionChecker cChecker = new CollisionChecker(this);
 	
-	public Asset aset = new Asset(this);
 	public SuperObject obj[] = new SuperObject[10];
+	public Asset aset = new Asset(this);
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth*scale, screenHeight*scale));
@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setFocusable(true);
 	
 	}
+	//we need to setup game before game start
 	public void SetupGame()
 	{
 		aset.setObj();
@@ -111,9 +112,9 @@ public class GamePanel extends JPanel implements Runnable{
 		super.paintComponent(g);
 		
 		Graphics2D g2 = (Graphics2D)g;
-		
+		//tile
 		tilemanager.draw(g2);
-		
+		//object
 		for(int i=0; i<obj.length; i++)
 		{
 			if(obj[i]!=null)

@@ -11,6 +11,7 @@ public class Entity {
 	public String direction;
 	//part of tile that's solid
 	public Rectangle solidArea;
+	public int solidDefaultX,solidDefaultY;
 	
 	public boolean collisonOn = false;
 

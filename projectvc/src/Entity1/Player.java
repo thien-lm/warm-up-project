@@ -17,7 +17,7 @@ public class Player extends Entity {
 	KeyHandle keyH ;
 //	private Image image;
 	
-	
+	int hasKey = 0;
 	 
 	public Player( GamePanel gp, KeyHandle kh)
 	{
@@ -26,6 +26,9 @@ public class Player extends Entity {
 		solidArea = new Rectangle();
 		solidArea.x = 8;
 		solidArea.y = 16;
+		//store solid area because we'll change it later
+		solidDefaultX = solidArea.x;
+		solidDefaultY = solidArea.y;
 		solidArea.width = 32;
 		solidArea.height = 32;
 		setDefault();
@@ -83,6 +86,13 @@ public class Player extends Entity {
 		//if collision = false player can move
 		//ditme phan nay sai lam vc
 		//-1h30p to fix bug
+		
+		//CHECK OBJECT COLLISION
+		int objindex = gp.cChecker.CheckObject(this, true);
+		System.out.println(objindex);
+		selectobj(objindex);
+		
+		
 		if(collisonOn == false)
 		{
 //			switch(direction)
@@ -114,6 +124,28 @@ public class Player extends Entity {
 			x += speed;
 			}
 	
+		}
+	}
+	public void selectobj(int i)
+	{
+		if(i != 999)
+		{
+			String name = gp.obj[i].name;
+			if(name == "key") 
+			{
+				hasKey ++;
+				gp.obj[i] = null;
+			}
+			
+			if(name == "door")
+			{
+				if(hasKey > 0)
+				{
+				gp.obj[i] = null;
+				hasKey--;
+				}
+			}
+				
 		}
 	}
 	
